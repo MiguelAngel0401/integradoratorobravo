@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}
+Agregar Producto
+{% endblock  %}
+
+{% block content %}
+<h1>Agregar Producto</h1>
+<form method="post" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div>
+        {{ form.name.label }}
+        {{ form.name() }}
+    </div>
+    <div>
+        {{ form.price.label }}
+        {{ form.price() }}
+    </div>
+    <div>
+        {{ form.stock.label }}    
+        {{ form.stock() }}
+    </div>
+    <div>
+        {{ form.size.label }}    
+        {{ form.size() }}
+    </div>
+    <div>
+        {{ form.category_id.label }}
+        {{ form.category_id() }}
+    </div>
+    <div>
+        {{ form.image.label }}
+        {{ form.image() }}
+        {% if form.image.errors %}
+                {% for error in form.image.errors%}
+                <p>{{error}}</p>
+                {% endfor %}  
+            {% endif %}
+    </div>
+    {% if image %}
+    <div>
+        <img src="{{ url_for('static', filename='images/products/' + image) }}" alt="" width="200px">
+    </div>
+    {% endif %}
+    <div>
+        {{ form.submit() }}
+    </div>
+    <a href="{{ url_for('product.home') }}" class="btn btn-warning">Regresar</a>
+</form>
+{% endblock %}
+        

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home Page
+{% endblock %}
+    
+{% block content %}
+<h1>Bienvenido al Bar Restaurante Toro Bravo Food & Drinks</h1>
+<form method="post">
+    {{ form.csrf_token }}
+    <div>
+        {{ form.categories.label }}
+        {{ form.categories() }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+    <div>
+    </div>
+</form>
+<div class="card-container">
+{%for product in products %}
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/products/' + product.image ) }}" alt="">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <a href="{{ url_for('product.detail', id=product.id) }}" class="btn">Ver más</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+    

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ups !
+{% endblock %}
+
+{% block content %}
+<h1>Pagina privada. Uso exclusivo para personal autorizado</h1>
+<li><a class="btn btn-secondary" href="{{url_for('home.home')}}">Regresar</a></li>
+{% endblock %}

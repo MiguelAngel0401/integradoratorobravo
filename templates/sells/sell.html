@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ventas
+{% endblock %}
+    
+{% block content %}
+<h1>Historial Ventas</h1>
+<a href="{{ url_for('sell.create_sell') }}" class="custom-btn">Generar Orden</a>
+<table id="sells">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Empleado</th>
+            <th>Producto</th>
+            <th>Total Productos</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sell in sells %}
+            <tr>
+                <td>{{ sell.id_user }}</td>
+                <td>{{ sell.id_prod }}</td>
+                <td>{{ sell.tProduct }}</td>
+                <td>{{ sell.pago }}</td>
+                <td>{{ sell.date }}</td>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+{% endblock %}

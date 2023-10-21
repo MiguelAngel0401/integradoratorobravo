@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Productos
+{% endblock %}
+    
+{% block content %}
+<h1>Productos</h1>
+<a href="{{ url_for('product.create') }}" class="custom-btn">Nuevo Producto</a>
+
+
+<table id="products">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Existencias</th>
+            <th>Imagen</th>
+            <th>Acciones</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('product.detail', id=product.id) }}">{{ product.id }}</a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td class="image-cell">
+                    <img src="{{ url_for('static', filename='images/products/' + product.image) }}" alt="" width="100px">
+                </td>
+                <td class="action-cell">
+                    <a href="{{ url_for('product.update_prod', id=product.id) }}" class="action-icon">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <form action="{{ url_for('product.delete', id=product.id) }}" method="post">
+                        <button type="submit" onclick="return confirm('Seguro?')" class="action-icon">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                    <a href="{{ url_for('product.detail', id=product.id) }}" class="action-icon">
+                        <i class="fa fa-info-circle"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+{% for i in range(pages) %}
+{% endfor %}
+{% endblock %}

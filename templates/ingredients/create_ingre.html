@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+Agregar Ingrediene
+{% endblock  %}
+
+{% block content %}
+<h1>Ingredientes del bar</h1>
+<form method="post" enctype="multipart/form-data">
+    {{ form.csrf_token}}
+    <div>
+        {{form.name.label}}
+        {{form.name(placeholder="Nombre")}}
+        {% if form.name.errors %}
+            {% for error in form.name.errors%}
+            <p>{{error}}</p>
+            {% endfor %}  
+        {% endif %}
+    </div>
+    <div>
+        {{form.marca.label}}
+        {{form.marca(placeholder="Marca")}}
+        {% if form.marca.errors %}
+            {% for error in form.marca.errors%}
+            <p>{{error}}</p>
+            {% endfor %}  
+        {% endif %}
+    </div>
+    <div>
+        {{form.size.label}}
+        {{form.size(placeholder="Presentacion")}}
+        {% if form.size.errors %}
+            {% for error in form.size.errors%}
+            <p>{{error}}</p>
+            {% endfor %}  
+        {% endif %}
+    </div>
+    <div>
+        {{form.stock.label}}
+        {{form.stock(placeholder="Existencia")}}
+        {% if form.stock.errors %}
+            {% for error in form.stock.errors%}
+            <p>{{error}}</p>
+            {% endfor %}  
+        {% endif %}
+    </div>
+    <div>
+        {{form.image.label}}
+        {{form.image()}}
+        {% if form.image.errors %}
+            {% for error in form.image.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        {{form.submit(class="btn btn-success")}}
+    </div>
+</form>
+<a href="{{ url_for('ingredient.ingredients') }}" class="btn btn-warning">Regresar</a>
+{% endblock %}
+        

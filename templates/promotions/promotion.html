@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Promociones
+{% endblock %}
+    
+{% block content %}
+<h1>Promociones</h1>
+<a href="{{ url_for('promotion.create_prom') }}" class="btn btn-success">Nueva Promocion</a>
+<table id="promotions">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prom in promotions %}
+            <tr>
+                <td>{{ prom.id }}</td>
+                <td>{{ prom.name }}</td>
+                <td>{{ prom.description }}</td>
+                <td>
+                    <a href="{{ url_for('promotion.update_prom', id=prom.id) }}">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </a>  / 
+                    <form method="post" action="{{ url_for('promotion.delete_prom', id=prom.id) }}">
+                        <button type="submit"
+                            onclick="return confirm('Seguro?')">
+                            <i class="fa fa-trash"></i>
+                        </button>   
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+    

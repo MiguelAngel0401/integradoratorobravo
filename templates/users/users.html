@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Users
+{% endblock %}
+    
+{% block content %}
+<h1>Usuarios</h1>
+<a href="{{ url_for('user.register') }}" class="custom-btn">Nuevo Usuario</a>
+<nav>
+    <div class="search-bar">
+      <form name="formSearch" method="POST" action="{{ url_for('product.search') }}" class="search" autocomplete="off">
+        <input type="search" name="buscar" class="search__input" placeholder="Busqueda por nombre" required>
+        <button type="submit" class="search__btn">
+          <i class="bi bi-search search__icon"></i>
+          Buscar
+        </button>
+      </form>
+    </div>
+  </nav>
+<table id="users">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Acciones</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.firs_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <img src="{{ url_for('static', filename='images/users/' + users.image) }}" alt="" width="100px">
+                </td>
+                <td>
+                    <td>
+                        <a href="{{ url_for('user.update_user', id=user.id) }}">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+{% for i in range(pages) %}
+{% endfor %}
+{% endblock %}

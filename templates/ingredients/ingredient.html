@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ingredientes
+{% endblock %}
+    
+{% block content %}
+<h1>Ingredientes</h1>
+<a href="{{ url_for('ingredient.create_ingre') }}" class="btn btn-success">Nuevo Ingrediente</a>
+<table id="ingredients">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Existencias</th>
+            <th>Marca</th>
+            <th>Presentacion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ing in ingredients %}
+            <tr>
+                <td>{{ ing.id }}</td>
+                <td>{{ ing.name }}</td>
+                <td>{{ ing.stock }}</td>
+                <td>{{ ing.marca }}</td>
+                <td>{{ ing.size }}</td>
+                <td>
+                    <a href="{{ url_for('ingredient.update_ingre', id=ing.id) }}">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </a> / 
+                    <form method="post" action="{{ url_for('ingredient.delete_ingre', id=ing.id) }}">
+                        <button type="submit"
+                            onclick="return confirm('Seguro?')">
+                            <i class="fa fa-trash"></i>
+                        </button>   
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+    

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}
+Agregar Categoria 
+{% endblock  %}
+
+{% block content %}
+<h1>Agregar categoría</h1>
+<div class="form-container">
+    <form method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div>
+            {{form.category.label}}
+            {{form.category(placeholder="Categoria")}}
+            {% if form.category.errors %}
+                {% for error in form.category.errors%}
+                <p>{{error}}</p>
+                {% endfor %}  
+            {% endif %}
+        </div>
+        <div>
+            {{form.description.label}}
+            {{form.description()}}
+            {% if form.description.errors %}
+                {% for error in form.description.errors%}
+                <p>{{error}}</p>
+                {% endfor %}  
+            {% endif %}
+        </div>
+        <div>
+            {{form.submit(class="btn btn-success")}}
+        </div>
+    </form>
+</div>
+<a href="{{ url_for('category.categories') }}" class="btn btn-warning">Regresar</a>
+{% endblock %}
+        

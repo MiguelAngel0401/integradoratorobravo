@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div id="result" class="container">
+    <h4>Resultados.. </h4>
+    {% if (miData) %} 
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Existencias</th>
+            <th>Imagen</th>
+            <th>Acciones</th> 
+        </tr>
+        </thead>
+        <tbody>
+            {% for product in miData %}
+                <tr>
+                    <td>{{product.id}}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>
+                        <img src="{{ url_for('static', filename='images/products/' + product.image) }}" alt="" width="100px">
+                    </td>
+                    <td class="action-cell">
+                            <a href="{{ url_for('product.update_prod', id=product.id) }}">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <form action="{{ url_for('product.delete', id=product.id) }}">
+                                <button type="submit" onclick="return confirm('Seguro?')">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+        <p>No hay resultados para la busqueda:
+            <strong class="busq colorCrimson"> {{ busqueda }}</strong>
+        </p>
+    {% endif %}
+{% endblock %}

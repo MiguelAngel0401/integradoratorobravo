@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+Creando Orden...
+{% endblock  %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div>
+        {{ form.prod_name.label }}
+        {{ form.prod_name() }}
+    </div>
+    <div>
+        {{ form.tProduct.label }}
+        {{ form.tProduct() }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock %}
+        
