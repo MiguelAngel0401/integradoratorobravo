@@ -1,5 +1,6 @@
 from .db import get_connection
 
+
 mydb = get_connection()
 
 class Category:
